@@ -33,7 +33,7 @@
           <small id="helpId" class="form-text text-muted">Helper Text</small>
           <input type="button" v-on:click="doAttack()" value="Attack!" class="btn btn-danger">
         </div>
-        <b-card :title="message">
+        <b-card>
           <h6 slot="header" class="mb-0">My name is {{ name }}.</h6>
           <h6 slot="header" class="mb-0">I am {{ age }} years old.</h6>
         </b-card>
@@ -50,6 +50,8 @@
     data: {        
         name: "Branden",
         age: "12",
+        race: {},
+        class: {},
         level: 1,
         xp: 0,
         abilities: {
@@ -60,7 +62,7 @@
             wisdom: 0,
             charisma: 0,
         },
-        abilityfocus: strength,
+        abilityfocus: "strength",
         armorclass: 10,
         heroics: 3,
         attack: 0,
