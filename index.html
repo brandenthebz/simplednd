@@ -47,11 +47,12 @@
     <script>
       var app = new Vue({
     el: "#app",
-    data: {
-        message: "About Me!",
+    data: {        
         name: "Branden",
         age: "12",
-        attributes: {
+        level: 1,
+        xp: 0,
+        abilities: {
             strength: 0,
             dexterity: 0,
             constitution: 0,
@@ -59,6 +60,7 @@
             wisdom: 0,
             charisma: 0,
         },
+        abilityfocus: strength,
         armorclass: 10,
         heroics: 3,
         attack: 0,
@@ -101,10 +103,10 @@
     },
     computed: {
         armorclasstotal: function() {
-            return this.attributes.dexterity + this.armorclass + this.armor.acbonus + this.shield.acbonus
+            return this.abilities.dexterity + this.armorclass + this.armor.acbonus + this.shield.acbonus
         },
         notice: function() {
-            return this.attributes.wisdom + 10;
+            return this.abilities.wisdom + 10;
         },
 
     },
@@ -120,7 +122,7 @@
                 console.log('Fumbled Roll')
             }
 
-            let roll = roll20 + this.attributes.strength + this.weapons.primary.hitbonus
+            let roll = roll20 + this.abilities.strength + this.weapons.primary.hitbonus
             console.log("Hit "+roll)
 
             let damage = this.rollDice(this.weapons.primary.damage[0], this.weapons.primary.damage[1])
