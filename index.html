@@ -17,30 +17,62 @@
     />
   </head>
   <body>
-    <div id="app">
-      <div class="container">
-        <div class="form-group">
-          <label for=""></label>
-          <input
-            type="text"
-            class="form-control"
-            name=""
-            id=""
-            aria-describedby="helpId"
-            placeholder=""
-            v-model="name"
-          />
-          <small id="helpId" class="form-text text-muted">Helper Text</small>
-          <input type="button" v-on:click="doAttack()" value="Attack!" class="btn btn-danger">
+    <div id="app" class="container">
+        <div class="col">
+            <div class="row"><h2>Abilities</h2>
+                <b-card header="Strength">
+                    <h3 class="text-center">{{abilities.strength}}</h3>
+                    <small class="text-muted">
+                        <span class="btn btn-sm btn-link" @click=stat("strength","up")>+</span>
+                        /
+                        <span class="btn btn-sm btn-link" @click=stat("strength","down")>-</span>
+                    </small>
+                </b-card>
+                <b-card header="dexterity">
+                        <h3 class="text-center">{{abilities.dexterity}}</h3>
+                        <small class="text-muted">
+                            <span class="btn btn-sm btn-link" @click=stat("dexterity","up")>+</span>
+                            /
+                            <span class="btn btn-sm btn-link" @click=stat("dexterity","down")>-</span>
+                        </small>
+                    </b-card>
+                    <b-card header="constitution">
+                            <h3 class="text-center">{{abilities.constitution}}</h3>
+                            <small class="text-muted">
+                                <span class="btn btn-sm btn-link" @click=stat("constitution","up")>+</span>
+                                /
+                                <span class="btn btn-sm btn-link" @click=stat("constitution","down")>-</span>
+                            </small>
+                        </b-card>
+                        <b-card header="wisdom">
+                                <h3 class="text-center">{{abilities.wisdom}}</h3>
+                                <small class="text-muted">
+                                    <span class="btn btn-sm btn-link" @click=stat("wisdom","up")>+</span>
+                                    /
+                                    <span class="btn btn-sm btn-link" @click=stat("wisdom","down")>-</span>
+                                </small>
+                            </b-card>
+                            <b-card header="intelligence">
+                                    <h3 class="text-center">{{abilities.intelligence}}</h3>
+                                    <small class="text-muted">
+                                        <span class="btn btn-sm btn-link" @click=stat("intelligence","up")>+</span>
+                                        /
+                                        <span class="btn btn-sm btn-link" @click=stat("intelligence","down")>-</span>
+                                    </small>
+                                </b-card>
+                                <b-card header="charisma">
+                                        <h3 class="text-center">{{abilities.charisma}}</h3>
+                                        <small class="text-muted">
+                                            <span class="btn btn-sm btn-link" @click=stat("charisma","up")>+</span>
+                                            /
+                                            <span class="btn btn-sm btn-link" @click=stat("charisma","down")>-</span>
+                                        </small>
+                                    </b-card>
+            </div>
+            <div class="row"></div>
+            <div class="row"></div>
         </div>
-        <b-card>
-          <h6 slot="header" class="mb-0">My name is {{ name }}.</h6>
-          <h6 slot="header" class="mb-0">I am {{ age }} years old.</h6>
-        </b-card>
-      </div>
-      <!-- New code here -->
-
-      <!-- New code here -->      
+        
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="http://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.js"></script>
@@ -50,8 +82,26 @@
     data: {        
         name: "Branden",
         age: "12",
-        race: {},
-        class: {},
+        race: {
+            human: {
+                scores: {
+            strength: 3,
+            dexterity: 3,
+            constitution: 3,
+            intelligence: 3,
+            wisdom: 3,
+            charisma: 3,
+        },
+                max: 7
+
+            }
+        },
+        class: {
+            fighter: {
+                hitdice: 8,
+                focus: "strength"
+            }
+        },
         level: 1,
         xp: 0,
         abilities: {
@@ -113,6 +163,16 @@
 
     },
     methods: {
+        stat: function(ability,dir){
+            
+            if(dir == "up"){
+                
+                this.abilities[ability] = this.abilities[ability] +1;
+            } else {
+                this.abilities[ability] = this.abilities[ability] -1;
+                
+            }
+        },
         doAttack: function() {
             let roll20 = this.rollDice(1, 20)
 
